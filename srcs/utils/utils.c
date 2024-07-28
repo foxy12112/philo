@@ -5,20 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 16:22:50 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/24 16:32:02 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/28 15:46:21 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/28 15:48:51 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_philo	*init_five(char *argv[])
+void	*safe_malloc(size_t bytes)
 {
-	t_philo	*philo;
-
-	philo = ft_calloc(sizeof(t_philo), 1);
-	if (!philo)
-		return (ft_printf("malloc error"));
-	philo->philosophers = ft_atoi(argv[1]);
-	philo->forks = philo->philosophers;
+	void	*ret;
+	
+	ret = malloc(bytes);
+	if (ret == NULL)
+		error_exit("Malloc Error");
+	return(ret);
+	
 }
+
+void	safe_mutex_handle(pthread_mutex_t)

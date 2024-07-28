@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/07/24 14:19:51 by ldick            ###   ########.fr        #
+#    Updated: 2024/07/28 15:36:52 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SUBMODULE	=	main-libs/Makefile
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c parse.c free.c children.c
+_UTILS		=	error.c parse.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)
