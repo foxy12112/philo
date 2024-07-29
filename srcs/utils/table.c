@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:21:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/29 11:34:35 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/29 11:34:40 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/29 11:51:55 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	philo_five(int argc, char *argv[])
-// {
-// 	t_philo *philo;
-	
-// 	philo = init(argc, argv);
-	
-// }
-
-int	main(int argc, char *argv[])
+int philo_loop(t_table *table)
 {
-	t_table		table;
-
-	if (argc == 5 || argc == 6)
+	while(table->end == false)
 	{
-		parse(&table, argv);
-		init(&table, argv);
-		start(&table);
-		clean(&table);
+		think;			//TODO
+		eat;			//TODO
+		sleep_philo;			//TODO
 	}
-	// else
-	// {
-	// 	error_exit("Wrong input\n")
-	// }
-	// close_all;
-	// free_all;
+}
+
+int	eat(t_table *table)
+{
+	pickup_fork_l;			//TODO
+	pickup_fork_r;			//TODO
+	fill_mout_with_food;	//TODO
+	put_fork_l_down;		//TODO
+	put_fork_r_down;		//TODO
 }

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/28 15:47:48 by ldick            ###   ########.fr       */
+/*   Updated: 2024/07/29 13:31:27 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include "libs.h"
+
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}		t_opcode;
 
 typedef struct s_fork
 {
@@ -58,5 +69,7 @@ typedef struct s_table
 void	error_exit(char *error);
 void	parse(t_table *table, char *argv[]);
 void	*safe_malloc(size_t bytes);
+void	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode opcode);
+int philo_loop(t_table *table);
 
 #endif

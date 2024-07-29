@@ -1,40 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   eating_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:21:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/29 11:34:35 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/29 11:39:17 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/29 11:49:56 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	philo_five(int argc, char *argv[])
-// {
-// 	t_philo *philo;
-	
-// 	philo = init(argc, argv);
-	
-// }
 
-int	main(int argc, char *argv[])
+int pickup_fork_l(t_table *table)
 {
-	t_table		table;
-
-	if (argc == 5 || argc == 6)
-	{
-		parse(&table, argv);
-		init(&table, argv);
-		start(&table);
-		clean(&table);
-	}
-	// else
-	// {
-	// 	error_exit("Wrong input\n")
-	// }
-	// close_all;
-	// free_all;
+	safe_mutex_handle(table->, )
 }

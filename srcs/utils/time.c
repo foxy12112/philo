@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:21:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/29 11:34:35 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/29 13:37:13 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/29 13:42:20 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	philo_five(int argc, char *argv[])
-// {
-// 	t_philo *philo;
-	
-// 	philo = init(argc, argv);
-	
-// }
-
-int	main(int argc, char *argv[])
+useconds_t	philo_get_time(void)
 {
-	t_table		table;
+	struct timeval	t;
 
-	if (argc == 5 || argc == 6)
-	{
-		parse(&table, argv);
-		init(&table, argv);
-		start(&table);
-		clean(&table);
-	}
-	// else
-	// {
-	// 	error_exit("Wrong input\n")
-	// }
-	// close_all;
-	// free_all;
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
