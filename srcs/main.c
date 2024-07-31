@@ -5,34 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:21:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/30 12:00:44 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/31 15:06:50 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// int	philo_five(int argc, char *argv[])
-// {
-// 	t_philo *philo;
-	
-// 	philo = init(argc, argv);
-	
-// }
-
 int	main(int argc, char *argv[])
 {
-	t_table		table;
+	t_philo	philo;
 
 	if (argc == 5 || argc == 6)
 	{
-		parse(&table, argv);
-		init(&table);
-		// start(&table);	//TODO
-		// clean(&table);	//TODO
+		init(argv, &philo);
 	}
-	else
-		error_exit("Wrong input\n");
-	// close_all;	//TODO
-	// free_all;	//TODO
+	return (0);
 }

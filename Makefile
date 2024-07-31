@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/07/30 12:03:08 by ldick            ###   ########.fr        #
+#    Updated: 2024/07/31 15:04:05 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BOLD_BLUE	:= \033[0;34m
 
 COMPILER	=	cc
 LIB_FLAGS	=	-ls -Lmain-libs
-CFLAGS		=	#-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -g
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
 
@@ -38,7 +38,7 @@ SUBMODULE	=	main-libs/Makefile
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	error.c parse.c init.c time.c utils.c
+_UTILS		=	init.c time.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)

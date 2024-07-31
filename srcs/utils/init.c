@@ -5,39 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 15:44:05 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/30 13:23:58 by ldick            ###   ########.fr       */
+/*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
+/*   Updated: 2024/07/31 15:13:23 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	init(t_table *table)
+void	init(char *argv[], t_philo *philo)
 {
-	table->end = false;
-	table->philo = safe_malloc(table->philo_nbr);
-	table->start = philo_get_time();
-	printf("%zu\n", table->start);
-	time_since_start(table);
-	// make_philos; // TODO
-}
-
-int	make_philos(t_philo *philo, int i)
-{
-	philo->id = i + 1;
-	philo->thread_id = 0;
-	pthread_mutex_init(&philo->fork_lock, NULL);
-	pthread_mutex_init(&philo->meal_lock, NULL);
-	philo->last_meal = 0;
-}
-int	idkyet(t_table *table)
-{
-	int			i;
-	t_list		*philos;
-
-	i = -1;
-	philos = 0;
-	while (++i < table->philo_nbr)
-		ft_lstadd_back(&philos, ft_lstnew(make_philos(&table->philo, i)));
-	return (philos);
+	philo->data->dead = false;
+	printf("test1\n");
+	philo->data->full = false;
+	printf("test2\n");
+	philo->data->meals_eaten = 0;
+	printf("test3\n");
+	philo->time->start_time = philo_get_time();
+	printf("test4\n");
+	philo->data->philo_nbr = ft_atol(argv[1]);
+	printf("test5\n");
+	philo->time->time_to_die = ft_atol(argv[2]);
+	printf("test6\n");
+	philo->time->time_to_eat = ft_atol(argv[3]);
+	printf("test7\n");
+	philo->time->time_to_sleep = ft_atol(argv[4]);
+	printf("test8\n");
+	if (argv[5])
+		philo->data->meals_amount = ft_atol(argv[5]);
+	else if (!argv[5])
+		philo->data->meals_amount = -1;
+	printf("%u\n", philo->time->start_time);
 }
