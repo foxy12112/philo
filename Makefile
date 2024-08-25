@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/07/31 15:04:05 by ldick            ###   ########.fr        #
+#    Updated: 2024/08/23 19:08:31 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BOLD_BLUE	:= \033[0;34m
 
 COMPILER	=	cc
 LIB_FLAGS	=	-ls -Lmain-libs
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	#-Wall -Wextra -Werror -g
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
 

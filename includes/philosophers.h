@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/07/31 15:05:03 by ldick            ###   ########.fr       */
+/*   Updated: 2024/08/25 12:58:48 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void					init(char *argv[], t_philo *philo);
 //			time functions				//
 
 useconds_t				philo_get_time(void);
+void					philo_time_since_start(t_time *t);
+int						ft_usleep(useconds_t time);
 
 #endif
