@@ -6,14 +6,13 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/08/25 12:58:48 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/07 16:11:52 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include "libs.h"
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -27,7 +26,7 @@
 # define PHILO_TAKE "has taken a fork"
 # define PHILO_DIE "died"
 
-typedef enum e_opcode
+typedef enum e_errcode
 {
 	LOCK,
 	UNLOCK,
@@ -36,47 +35,42 @@ typedef enum e_opcode
 	CREATE,
 	JOIN,
 	DETACH,
-}						t_opcode;
+}			t_errcode;
 
 typedef struct s_time
 {
-	useconds_t			current_time;
-	useconds_t			start_time;
-	useconds_t			time_to_die;
-	useconds_t			time_to_eat;
-	useconds_t			time_to_sleep;
-}						t_time;
-
-typedef struct s_philo_data
-{
-	long				philo_nbr;
-	long				meals_amount;
-	int					meals_eaten;
-	bool				dead;
-	bool				full;
-	pthread_mutex_t		*dead_lock;
-	pthread_mutex_t		*eat_count_lock;
-}						t_philo_data;
+	long	current_time;
+	long	start_time;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+}			t_time;
 
 typedef struct s_philo
 {
-	int					id;
-	pthread_t			thread_id;
-	pthread_mutex_t		last_meal_lock;
-	pthread_mutex_t		*fork_lock;
-	useconds_t			last_meal;
-	struct s_philo_data	*data;
-	struct s_time		*time;
-}						t_philo;
+	int		philo_id;
+	int		fork_l;
+	int		fork_r;
+	int		meals_eaten;
+	bool	full;
+	bool	dead;
+	int		philo_nbr;
+	int		meals_till_full;
+}			t_philo;
 
 //			init						//
 
-void					init(char *argv[], t_philo *philo);
+int			parse(char *argv[], t_philo *philo);
+t_philo		init(char *argv[], t_philo *philo, t_time *time);
 
 //			time functions				//
 
-useconds_t				philo_get_time(void);
-void					philo_time_since_start(t_time *t);
-int						ft_usleep(useconds_t time);
+long		philo_get_time(void);
+long		philo_time_since_start(long start_time);
+int			ft_usleep(long time);
+
+//			utils						//
+
+int			ft_atoi(char *str);
 
 #endif

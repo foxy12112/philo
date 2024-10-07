@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/08/23 19:08:31 by ldick            ###   ########.fr        #
+#    Updated: 2024/08/30 12:57:37 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ BOLD_BLUE	:= \033[0;34m
 #################################################################################################
 
 COMPILER	=	cc
-LIB_FLAGS	=	-ls -Lmain-libs
-CFLAGS		=	#-Wall -Wextra -Werror -g
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
 
@@ -38,7 +36,7 @@ SUBMODULE	=	main-libs/Makefile
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c time.c
+_UTILS		=	init.c time.c utils.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)
@@ -62,17 +60,10 @@ bin/%.o:		srcs/%.c | bin
 				@echo "$(GREEN) Compiling $(Compiler) $(CLR_RMV) -c -o $(YELLOW) $@ $(CYAN) $^ $(GREEN) $(CFLAGS) $(GREEN) $(INCLUDES)"
 				@$(COMPILER) -c -o $@ $^ $(CFLAGS) $(INCLUDES)
 
-$(LIBRARY):		$(SUBMODULE)
-				@make -C main-libs --silent
-
-$(SUBMODULE):
-				git submodule update --init --recursive
-
-$(NAME):		$(LIBRARY) $(OBJS)
-				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_FLAGS)
+$(NAME):		$(OBJS)
+				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-				@cd main-libs && make fclean
 				@rm -rf bin
 
 fclean:			clean
