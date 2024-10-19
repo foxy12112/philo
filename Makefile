@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/08/30 12:57:37 by ldick            ###   ########.fr        #
+#    Updated: 2024/10/18 13:19:24 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,10 @@ SUBMODULE	=	main-libs/Makefile
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c time.c utils.c
+_UTILS		=	
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
-_SRCS		=	main.c $(UTILS)
+_SRCS		=	 $(UTILS)
 SRCS		=	$(addprefix srcs/, $(_SRCS))
 
 OBJS		=	$(SRCS:srcs/%.c=bin/%.o)
