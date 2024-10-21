@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/19 15:37:35 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/21 11:50:13 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ int main(int argc, char *argv[])
 		init(argc, argv);
 	else
 		return (printf("error, argument count\n"));
+	return (1);
 }

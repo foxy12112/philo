@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/19 15:41:56 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/21 11:51:40 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+typedef struct s_philo
+{
+	int				philo_id;
+	int				fork_l;
+	int				fork_r;
+}					t_philo;
+
 typedef struct s_table
 {
 	long			time2die;
@@ -31,16 +38,16 @@ typedef struct s_table
 	t_philo			*philo;
 }					t_table;
 
-typedef struct s_philo
-{
-	int				philo_id;
-	
-}					t_philo;
 
 //			init						//
+
+int init(int argc, char *argv[]);
 
 //			time functions				//
 
 //			utils						//
+
+int	ft_atoi(const char *str);
+long	ft_atol(const char *str);
 
 #endif
