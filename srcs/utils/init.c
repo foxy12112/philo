@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/21 13:33:23 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/22 12:33:47 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,29 @@ int init(int argc, char *argv[])
 
 static int	init_philos(t_table *table)
 {
-	int	num;
 	int	i;
 
-	i = 1;
-	num = table->philo_amount;
-	while(i < num)
+	i = 0;
+
+	while(i < table->philo_amount)
 	{
-		table->philo[i].
+		table->philo[i].table = table;
+		table->philo[i].philo_id = i + 1;
+		table->philo[i].eat_count = 0;
+		table->philo[i].sleeping = 0;
+		table->philo[i].eating = 0;
+		table->philo[i].time_to_die = table->time2die;
+		if (!pthread_mutex_init(&table->philo[i].lock, NULL) != 0)
+			return (0);
 		i++;
 	}
-	printf("%d\n", i);
 	return (1);
+}
+
+int	init_forks(t_table *table)
+{
+	int i;
+
+	i = 0;
+	while()
 }
