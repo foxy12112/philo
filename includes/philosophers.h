@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/22 12:31:23 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/23 14:03:04 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ typedef struct s_table
 
 //			init						//
 
-int init(int argc, char *argv[]);
+int init(int argc, char *argv[], t_table *table);
 
 //			time functions				//
+
+long	philo_get_time(void);
+void	ft_usleep(long eepy_time);
+long	tss(t_table *table);
 
 //			utils						//
 

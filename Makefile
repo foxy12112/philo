@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/10/21 11:50:56 by ldick            ###   ########.fr        #
+#    Updated: 2024/10/23 14:02:42 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ bin/%.o:		srcs/%.c | bin
 
 $(NAME):		$(OBJS)
 				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
+				@echo "\t\t\t\t$(RED) compilation success :3"
 
 clean:
 				@rm -rf bin
