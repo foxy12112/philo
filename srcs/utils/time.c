@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:21 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/23 14:03:47 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/24 11:50:57 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void	ft_usleep(long eepy_time)
 
 	start = philo_get_time();
 	while ((philo_get_time() - start) < eepy_time)
-		usleep(eepy_time /= 2);
+		usleep(eepy_time / 2);
 }
