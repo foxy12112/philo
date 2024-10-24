@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/10/23 14:02:42 by ldick            ###   ########.fr        #
+#    Updated: 2024/10/24 14:07:08 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ YELLOW		:= \033[1;33m
 BLUE		:= \033[1;34m
 CYAN 		:= \033[1;36m
 BOLD_BLUE	:= \033[0;34m
+NC			:= \033[0m
 
 #################################################################################################
 #											Flags												#
@@ -31,12 +32,14 @@ BOLD_BLUE	:= \033[0;34m
 COMPILER	=	cc
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
+CFLAGS		=	-pthread -Wall -Werror -Wextra
+ERROR_FILE	=	error.log
 
 #################################################################################################
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c print.c time.c utils.c
+_UTILS		=	init.c print.c time.c utils.c error.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)
@@ -57,8 +60,8 @@ bin:
 				@mkdir -p bin/utils
 
 bin/%.o:		srcs/%.c | bin
-				@echo "$(GREEN) Compiling $(Compiler) $(CLR_RMV) -c -o $(YELLOW) $@ $(CYAN) $^ $(GREEN) $(CFLAGS) $(GREEN) $(INCLUDES)"
-				@$(COMPILER) -c -o $@ $^ $(CFLAGS) $(INCLUDES)
+				@echo "$(GREEN) Compiling $(Compiler) $(CLR_RMV) -c -o $(YELLOW) $@ $(CYAN) $^ $(GREEN) $(CFLAGS) $(GREEN) $(INCLUDES) $(NC)"
+				@$(COMPILER) -c -o $@ $^ $(CFLAGS) $(INCLUDES) 2> $(ERROR_FILE) || (cat $(ERROR_FILE) && echo "$(RED)Compilation failed :0\nfailed file: \t\t$(YELLOW)$<$(NC)\n\n" && exit 1)
 
 $(NAME):		$(OBJS)
 				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
@@ -66,6 +69,7 @@ $(NAME):		$(OBJS)
 
 clean:
 				@rm -rf bin
+				@rm -f $(ERROR_FILE)
 
 fclean:			clean
 				@rm -f $(NAME)
