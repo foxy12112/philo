@@ -6,13 +6,13 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/24 12:54:34 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/25 20:14:14 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-void	philo_routine_one(t_table *table)
+void	philo_routine(t_table *table)
 {
 	
 }

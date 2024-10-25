@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:21 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/24 11:50:57 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/25 19:49:00 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ long	philo_get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-long	tss(t_table *table)
+long	tss(long start_time)
 {
 	long	ret;
 
-	ret = philo_get_time() - table->start_time;
+	ret = philo_get_time() - start_time;
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/24 13:50:51 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/25 20:10:18 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define EAT 1
+# define THINK 2
+# define SLEEP 3
+# define FORK 4
+# define DEAD 5
+
 typedef struct s_philo
 {
 	struct s_table	*table;
 	int				philo_id;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	*lock;
 	int				eat_count;
 	int				eating;
 	int				sleeping;
@@ -35,6 +41,7 @@ typedef struct s_philo
 
 typedef struct s_table
 {
+	pthread_t		*pid;
 	long			time2die;
 	long			time2eat;
 	long			time2sleep;
@@ -49,11 +56,15 @@ typedef struct s_table
 
 int					init(int argc, char *argv[], t_table *table);
 
+//			print						//
+
+void	print_status(long time, int id, int status);
+
 //			time functions				//
 
 long				philo_get_time(void);
 void				ft_usleep(long eepy_time);
-long				tss(t_table *table);
+long				tss(long start_time);
 
 //			utils						//
 
