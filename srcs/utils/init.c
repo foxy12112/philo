@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/25 19:33:04 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/28 13:42:13 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int	init_philos(t_table *table)
 		table->philo[i].philo_id = i + 1;
 		table->philo[i].eat_count = 0;
 		table->philo[i].sleeping = 0;
-		table->philo[i].eating = 0;
 		table->philo[i].time_to_die = table->time2die;
+		table->philo[i].importance = 0;
 		if (pthread_mutex_init(&table->philo[i].lock, NULL) != 0)
 			return (0);
 		i++;

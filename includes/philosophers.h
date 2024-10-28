@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/25 20:10:18 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/28 13:44:52 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@
 typedef struct s_philo
 {
 	struct s_table	*table;
+	pthread_t		pid;
 	int				philo_id;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*lock;
+	pthread_mutex_t	lock;
 	int				eat_count;
-	int				eating;
 	int				sleeping;
+	int				importance;
 	long			time_to_die;
 }					t_philo;
 
@@ -51,6 +52,13 @@ typedef struct s_table
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 }					t_table;
+
+//			routine						//
+
+void	think(t_philo *philo);
+void	eat(t_philo *philo);
+void	philo_routine(t_philo *philo);
+void	sleepin(t_philo *philo);
 
 //			init						//
 
