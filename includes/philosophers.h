@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/29 11:14:07 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/29 15:04:47 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_philo
 	int				sleeping;
 	int				importance;
 	long			time_to_die;
+	long			start_time;
+	int				eating;
 }					t_philo;
 
 typedef struct s_table
