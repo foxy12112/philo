@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/28 13:42:13 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/29 11:44:38 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int	init(int argc, char *argv[], t_table *table)
 	table->time2sleep = ft_atol(argv[4]);
 	if (argc == 6)
 		table->meals2eat = ft_atoi(argv[5]);
+	table->pid = malloc(table->philo_amount * sizeof(pthread_t));
+	if (!table->pid)
+		return (1);
+	table->forks = malloc(table->philo_amount * sizeof(pthread_mutex_t));
+	table->philo = malloc(table->philo_amount * sizeof(t_philo));
 	init_philos(table);
 	init_forks(table);
 	return (1);

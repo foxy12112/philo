@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/28 13:44:52 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/29 11:14:07 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_table
 {
 	pthread_t		*pid;
 	long			time2die;
+	int				dead;
 	long			time2eat;
 	long			time2sleep;
 	int				meals2eat;
@@ -57,8 +58,9 @@ typedef struct s_table
 
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
-void	philo_routine(t_philo *philo);
+void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
+void	one_philo(t_table *table);
 
 //			init						//
 
