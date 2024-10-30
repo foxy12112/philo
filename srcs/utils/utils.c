@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/28 11:36:39 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/30 16:55:51 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nbr = 0;
 	sign = 0;
-	while (str[i] != '\0' && (str[i] == 32
-			|| str[i] == '\t' || str[i] == '\n'
+	while (str[i] != '\0' && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
 			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
@@ -54,8 +53,7 @@ long	ft_atol(const char *str)
 	i = 0;
 	nbr = 0;
 	sign = 0;
-	while (str[i] != '\0' && (str[i] == 32
-			|| str[i] == '\t' || str[i] == '\n'
+	while (str[i] != '\0' && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
 			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
@@ -71,4 +69,16 @@ long	ft_atol(const char *str)
 	if (sign == -1)
 		return (nbr * -1);
 	return (nbr);
+}
+
+void	ft_kill(t_table *table)
+{
+	unsigned int i;
+
+	i = 0;
+	while (i <= table->philo_amount)
+	{
+		pthread_mutex_destroy(&table->philo[i].lock);
+		pthread_mutex_destroy(&table->forks[i]);
+	}
 }

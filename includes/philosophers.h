@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/29 15:04:47 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/30 16:57:17 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	long			time_to_die;
 	long			start_time;
 	int				eating;
+	int				dead;
 }					t_philo;
 
 typedef struct s_table
@@ -83,5 +84,6 @@ long				tss(long start_time);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 int					error_check(int argc, char *argv[]);
+void				ft_kill(t_table *table);
 
 #endif
