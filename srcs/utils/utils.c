@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/30 16:55:51 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/31 12:34:34 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ long	ft_atol(const char *str)
 
 void	ft_kill(t_table *table)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i <= table->philo_amount)

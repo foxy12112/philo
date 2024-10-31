@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/30 16:57:17 by ldick            ###   ########.fr       */
+/*   Updated: 2024/10/31 12:45:28 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	eat(t_philo *philo);
 void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
 void	one_philo(t_table *table);
+void	eat_one(t_philo *philo);
 
 //			init						//
 
@@ -85,5 +86,9 @@ int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 int					error_check(int argc, char *argv[]);
 void				ft_kill(t_table *table);
+
+//			Debug						//
+
+void	debug(int argc, char *argv[], t_table *table);
 
 #endif
