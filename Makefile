@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/10/31 14:08:23 by ldick            ###   ########.fr        #
+#    Updated: 2024/11/01 19:39:24 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ NC			:= \033[0m
 COMPILER	=	cc
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
-CFLAGS		=	-pthread -Wall -Werror -Wextra
+CFLAGS		=	-pthread -Wall -Werror -Wextra -g -fsanitize=address 
 ERROR_FILE	=	error.log
 
 #################################################################################################
@@ -70,7 +70,7 @@ $(NAME):		$(OBJS)
 clean:
 				@rm -rf bin
 				@rm -f $(ERROR_FILE)
-				@rm -f output.log
+				@rm -f output*.log
 
 fclean:			clean
 				@rm -f $(NAME)

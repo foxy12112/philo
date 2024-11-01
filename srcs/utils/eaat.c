@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/31 14:05:41 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/01 19:49:38 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ static void	return_forks(t_philo *philo)
 void	eat(t_philo *philo)
 {
 	if (pick_forks(philo) == 2)
+	{
+		ft_usleep(philo->table->time2die);
 		return ;
-	pick_forks(philo);
-	pthread_mutex_lock(&philo->lock);
+	}
+	// pthread_mutex_lock(&philo->lock);
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
 	print_status(tss(philo->table->start_time), philo->philo_id, EAT);
 	philo->eat_count++;
 	ft_usleep(philo->table->time2eat);
-	pthread_mutex_unlock(&philo->lock);
+	// pthread_mutex_unlock(&philo->lock);
 	return_forks(philo);
 	sleepin(philo);
 }

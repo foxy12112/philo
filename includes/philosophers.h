@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/31 12:45:28 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/01 19:46:22 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_philo
 	int				importance;
 	long			time_to_die;
 	long			start_time;
-	int				eating;
 	int				dead;
 }					t_philo;
 
@@ -52,8 +51,8 @@ typedef struct s_table
 	long			time2sleep;
 	int				meals2eat;
 	long			start_time;
-	unsigned int	philo_amount;
-	t_philo			*philo;
+	int				philo_amount;
+	t_philo			**philo;
 	pthread_mutex_t	*forks;
 }					t_table;
 
@@ -90,5 +89,6 @@ void				ft_kill(t_table *table);
 //			Debug						//
 
 void	debug(int argc, char *argv[], t_table *table);
+void	log_philo_data(t_table *table);
 
 #endif

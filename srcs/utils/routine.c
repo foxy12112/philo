@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/31 14:06:58 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/01 19:54:29 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	one_philo(t_table *table)
 {
-	table->philo[0].start_time = table->start_time;
+	table->philo[0]->start_time = table->start_time;
 	if (pthread_create(&table->pid[0], NULL, &philo_routine, &table->philo[0]))
 		return ;
 	pthread_detach(table->pid[0]);
-	while (!table->philo[0].dead)
+	while (!table->philo[0]->dead)
 		ft_usleep(0);
-	ft_kill(table);
+	pthread_mutex_destroy(&table->philo[0]->lock);
+	pthread_mutex_destroy(table->philo[0]->fork_r);
 	return ;
 }
 
@@ -38,10 +39,13 @@ void	*philo_routine(void *philo_ptr)
 			philo->dead = 1;
 			pthread_mutex_unlock(&philo->lock);
 			print_status(tss(philo->start_time), philo->philo_id, DEAD);
-			ft_kill(philo->table);
+			break ;
 		}
 		if (philo->eat_count == philo->table->meals2eat)
+		{
 			printf("dis fucker is full\n");
+			break ;
+		}
 		think(philo);
 		eat(philo);
 	}
