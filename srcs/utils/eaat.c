@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/01 19:49:38 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/02 12:44:41 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ static int	pick_forks(t_philo *philo)
 	}
 	else
 	{
-		pthread_mutex_lock(philo->fork_r);
-		print_status(tss(philo->table->start_time), philo->philo_id, FORK);
-		pthread_mutex_lock(philo->fork_l);
-		print_status(tss(philo->table->start_time), philo->philo_id, FORK);
+		if (!pthread_mutex_lock(philo->fork_r))
+			print_status(tss(philo->table->start_time), philo->philo_id, FORK);
+		else
+			pthread_mutex_unlock(philo->fork_r);
+		if (!pthread_mutex_lock(philo->fork_l))
+			print_status(tss(philo->table->start_time), philo->philo_id, FORK);
+		else
+			pthread_mutex_unlock(philo->fork_l);
 	}
 	return (0);
 }
@@ -39,19 +43,24 @@ static void	return_forks(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	if (pick_forks(philo) == 2)
+	int foks;
+
+	foks = pick_forks(philo);
+	if (foks == 0)
 	{
-		ft_usleep(philo->table->time2die);
-		return ;
+		pthread_mutex_lock(&philo->lock);
+		philo->time_to_die = philo_get_time() + philo->table->time2die;
+		print_status(tss(philo->table->start_time), philo->philo_id, EAT);
+		philo->eat_count++;
+		ft_usleep(philo->table->time2eat);
+		pthread_mutex_unlock(&philo->lock);
+		return_forks(philo);
+		sleepin(philo);
 	}
-	// pthread_mutex_lock(&philo->lock);
-	philo->time_to_die = philo_get_time() + philo->table->time2die;
-	print_status(tss(philo->table->start_time), philo->philo_id, EAT);
-	philo->eat_count++;
-	ft_usleep(philo->table->time2eat);
-	// pthread_mutex_unlock(&philo->lock);
+	else if (foks == 2)
+		ft_usleep(philo->table->time2die);
 	return_forks(philo);
-	sleepin(philo);
+	return ;
 }
 
 void	think(t_philo *philo)

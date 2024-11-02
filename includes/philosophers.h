@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/01 19:46:22 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/02 15:54:22 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				importance;
 	long			time_to_die;
 	long			start_time;
+	long			deb_time;
 	int				dead;
 }					t_philo;
 
@@ -63,7 +64,7 @@ void	eat(t_philo *philo);
 void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
 void	one_philo(t_table *table);
-void	eat_one(t_philo *philo);
+void	*deadwatch(void *table_ptr);
 
 //			init						//
 

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/01 19:54:29 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/02 16:02:32 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	one_philo(t_table *table)
 {
 	table->philo[0]->start_time = table->start_time;
-	if (pthread_create(&table->pid[0], NULL, &philo_routine, &table->philo[0]))
+	if (pthread_create(&table->pid[0], NULL, &philo_routine, table->philo[0]))
 		return ;
 	pthread_detach(table->pid[0]);
 	while (!table->philo[0]->dead)
@@ -31,21 +31,19 @@ void	*philo_routine(void *philo_ptr)
 
 	philo = (t_philo *)philo_ptr;
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
-	while (philo->dead == 0 || philo->eat_count != philo->table->meals2eat)
+	if (pthread_create(&philo->pid, NULL, &deadwatch, (void *)philo))
+		return ((void *)1);
+	while (true)
 	{
-		if (philo->time_to_die <= philo_get_time())
-		{
-			pthread_mutex_lock(&philo->lock);
-			philo->dead = 1;
-			pthread_mutex_unlock(&philo->lock);
-			print_status(tss(philo->start_time), philo->philo_id, DEAD);
+		if (philo->dead == 1)
 			break ;
-		}
 		if (philo->eat_count == philo->table->meals2eat)
 		{
 			printf("dis fucker is full\n");
 			break ;
 		}
+		if (philo->table->dead == 1)
+			return (NULL);
 		think(philo);
 		eat(philo);
 	}
@@ -53,10 +51,24 @@ void	*philo_routine(void *philo_ptr)
 	return (NULL);
 }
 
-// void	*deadwatch(void *table_ptr)
-// {
-// 	t_table *table;
+void	*deadwatch(void *philo_ptr)
+{
+	t_philo	*philo;
 
-// 	table = (t_table *)table_ptr;
-	
-// }
+	philo = (t_philo *)philo_ptr;
+	while (true)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (philo_get_time() >= philo->time_to_die)
+		{
+			print_status(tss(philo->start_time), philo->philo_id, DEAD);
+			philo->dead = 1;
+			philo->table->dead = 1;
+			philo->deb_time = tss(philo->start_time);
+		}
+		pthread_mutex_unlock(&philo->lock);
+		if (philo->dead == 1 || philo->table->dead == 1)
+			break ;
+	}
+	return (NULL);
+}
