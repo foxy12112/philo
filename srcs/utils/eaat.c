@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/02 12:44:41 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/03 17:22:07 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	return_forks(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	int foks;
+	int	foks;
 
 	foks = pick_forks(philo);
-	if (foks == 0)
+	if (foks == 0 || philo->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
 		philo->time_to_die = philo_get_time() + philo->table->time2die;
@@ -55,6 +55,8 @@ void	eat(t_philo *philo)
 		ft_usleep(philo->table->time2eat);
 		pthread_mutex_unlock(&philo->lock);
 		return_forks(philo);
+		if (philo->eat_count == philo->table->time2eat)
+			return ;
 		sleepin(philo);
 	}
 	else if (foks == 2)

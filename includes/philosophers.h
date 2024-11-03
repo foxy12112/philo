@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/02 15:54:22 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/03 16:28:13 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ long				tss(long start_time);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 int					error_check(int argc, char *argv[]);
-void				ft_kill(t_table *table);
+void				ft_end(t_table *table);
 
 //			Debug						//
 
-void	debug(int argc, char *argv[], t_table *table);
+void	debug(t_table *table);
 void	log_philo_data(t_table *table);
 
 #endif

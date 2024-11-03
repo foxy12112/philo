@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/02 14:16:43 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/03 17:20:00 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ int	main(int argc, char *argv[])
 {
 	t_table	table;
 
-	error_check(argc, argv);
+	if (error_check(argc, argv))
+		return (1);
 	if (argc == 5 || argc == 6)
 		init(argc, argv, &table);
-		// debug(argc, argv, &table);
+	debug(&table);
 	if (table.philo_amount > 1)
 		multi_philo(&table);
 	else
 		one_philo(&table);
 	wait_for_threads(&table);
 	log_philo_data(&table);
+	ft_end(&table);
 	return (0);
 }

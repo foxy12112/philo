@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/02 16:02:32 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/03 17:44:25 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void	*philo_routine(void *philo_ptr)
 		if (philo->eat_count == philo->table->meals2eat)
 		{
 			printf("dis fucker is full\n");
+			philo->dead = 1;
 			break ;
 		}
-		if (philo->table->dead == 1)
-			return (NULL);
+		if (philo->table->dead == 1 || philo->dead == 1)
+			break ;
 		think(philo);
+		if (philo->table->dead == 1 || philo->dead == 1)
+			break ;
 		eat(philo);
 	}
 	pthread_join(philo->pid, NULL);
