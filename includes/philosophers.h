@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/03 16:28:13 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/04 16:53:14 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	pthread_mutex_t	lock;
 	int				eat_count;
 	int				sleeping;
+	int				eating;
 	int				importance;
 	long			time_to_die;
 	long			start_time;

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/03 17:44:25 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/04 17:06:50 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,14 @@ void	*philo_routine(void *philo_ptr)
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
 	if (pthread_create(&philo->pid, NULL, &deadwatch, (void *)philo))
 		return ((void *)1);
-	while (true)
+	while (philo->table->dead == 0)
 	{
-		if (philo->dead == 1)
-			break ;
-		if (philo->eat_count == philo->table->meals2eat)
-		{
-			printf("dis fucker is full\n");
-			philo->dead = 1;
-			break ;
-		}
-		if (philo->table->dead == 1 || philo->dead == 1)
-			break ;
+		// if (philo->eat_count == philo->table->meals2eat)
+		// {
+		// 	printf("dis fucker is full\n");
+		// 	break ;
+		// }
 		think(philo);
-		if (philo->table->dead == 1 || philo->dead == 1)
-			break ;
 		eat(philo);
 	}
 	pthread_join(philo->pid, NULL);
@@ -59,10 +52,10 @@ void	*deadwatch(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (true)
+	while (philo->table->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
-		if (philo_get_time() >= philo->time_to_die)
+		if (philo_get_time() >= philo->time_to_die && philo->eating == 0)
 		{
 			print_status(tss(philo->start_time), philo->philo_id, DEAD);
 			philo->dead = 1;
