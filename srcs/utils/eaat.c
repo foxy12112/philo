@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/05 14:07:45 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 16:34:48 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static int	pick_forks(t_philo *philo)
 		if (!pthread_mutex_lock(philo->fork_r) && !philo->dead)
 			print_status(tss(philo->table->start_time), philo->philo_id, FORK);
 		else
-			pthread_mutex_unlock(philo->fork_r);
+			return (pthread_mutex_unlock(philo->fork_r), 1);
 		if (!pthread_mutex_lock(philo->fork_l) && !philo->dead)
 			print_status(tss(philo->table->start_time), philo->philo_id, FORK);
 		else
-			pthread_mutex_unlock(philo->fork_l);
+			return (pthread_mutex_unlock(philo->fork_l), 1);
 	}
 	return (0);
 }

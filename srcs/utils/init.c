@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/04 16:53:49 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 15:11:56 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	init_philos(t_table *table)
 		table->philo[i]->table = table;
 		table->philo[i]->philo_id = i + 1;
 		table->philo[i]->eat_count = 0;
+		table->philo[i]->start = 0;
 		table->philo[i]->eating = 0;
 		table->philo[i]->sleeping = 0;
 		table->philo[i]->start_time = table->start_time;
@@ -71,6 +72,7 @@ int	init(int argc, char *argv[], t_table *table)
 {
 	table->start_time = philo_get_time();
 	table->meals2eat = -1;
+	table->all_full = 0;
 	table->philo_amount = ft_atoi(argv[1]);
 	table->time2die = ft_atol(argv[2]);
 	table->time2eat = ft_atol(argv[3]);

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:37:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/03 16:26:15 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 14:44:42 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	log_philo_data(t_table *table)
 	FILE	*logfile;
 	int		i;
 
-	i = 1;
+	i = 0;
 	logfile = fopen("output_dead.log", "w");
 	if (!logfile)
 		return ;

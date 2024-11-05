@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/05 12:12:18 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 15:10:22 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_philo
 	int				eat_count;
 	int				sleeping;
 	int				eating;
+	int				start;
 	int				importance;
 	long			time_to_die;
 	long			start_time;
@@ -52,6 +53,7 @@ typedef struct s_table
 	long			time2eat;
 	long			time2sleep;
 	int				meals2eat;
+	int				all_full;
 	long			start_time;
 	int				philo_amount;
 	t_philo			**philo;
