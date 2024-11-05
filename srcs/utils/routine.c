@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/04 17:06:50 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 14:06:38 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	*philo_routine(void *philo_ptr)
 		return ((void *)1);
 	while (philo->table->dead == 0)
 	{
-		// if (philo->eat_count == philo->table->meals2eat)
-		// {
-		// 	printf("dis fucker is full\n");
-		// 	break ;
-		// }
+		if (philo->eat_count == philo->table->meals2eat)
+		{
+			printf("dis fucker is full\n");
+			break ;
+		}
 		think(philo);
 		eat(philo);
 	}
@@ -52,7 +52,7 @@ void	*deadwatch(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (philo->table->dead == 0)
+	while (!philo->table->dead && !philo->dead)
 	{
 		pthread_mutex_lock(&philo->lock);
 		if (philo_get_time() >= philo->time_to_die && philo->eating == 0)
@@ -63,7 +63,7 @@ void	*deadwatch(void *philo_ptr)
 			philo->deb_time = tss(philo->start_time);
 		}
 		pthread_mutex_unlock(&philo->lock);
-		if (philo->dead == 1 || philo->table->dead == 1)
+		if (philo->dead || philo->table->dead)
 			break ;
 	}
 	return (NULL);

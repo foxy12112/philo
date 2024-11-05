@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/04 16:53:14 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/05 12:12:18 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_table
 //			routine						//
 
 void	think(t_philo *philo);
-void	eat(t_philo *philo);
+int		eat(t_philo *philo);
 void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
 void	one_philo(t_table *table);
