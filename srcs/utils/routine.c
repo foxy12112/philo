@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:57 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/07 15:06:20 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	one_philo(t_table *table)
 	while (!table->philo[0]->dead)
 		ft_usleep(0);
 	pthread_mutex_destroy(&table->philo[0]->lock);
-	pthread_mutex_destroy(table->philo[0]->fork_r);
+	pthread_mutex_destroy(table->forks);
+	
 	return ;
 }
 
