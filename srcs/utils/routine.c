@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/07 15:06:20 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/07 15:26:10 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	one_philo(t_table *table)
 		ft_usleep(0);
 	pthread_mutex_destroy(&table->philo[0]->lock);
 	pthread_mutex_destroy(table->forks);
-	
 	return ;
 }
 
@@ -42,7 +41,7 @@ void	*philo_routine(void *philo_ptr)
 	think(philo);
 	while (philo->table->dead == 0)
 	{
-		if (philo->table->meals2eat == philo->table->all_full)
+		if (philo->table->philo_amount == philo->table->all_full)
 			break ;
 		eat(philo);
 	}
