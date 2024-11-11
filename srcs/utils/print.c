@@ -6,11 +6,13 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/07 15:20:59 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/11 15:59:19 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+//TODO
 
 // void	print_status(long time, int id, int status)
 // {

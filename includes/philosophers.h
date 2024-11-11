@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/05 15:10:22 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/11 15:53:13 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void				ft_end(t_table *table);
 
 void	debug(t_table *table);
 void	log_philo_data(t_table *table);
+void	check_philo_thread_a_forks(t_table *table);
 
 #endif
