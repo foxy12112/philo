@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:37:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/11 16:02:34 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/12 14:13:56 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void	log_philo_data(t_table *table)
 		fprintf(logfile, "\ttime alive: %ld\n", tss(table->start_time));
 		i++;
 	}
+	fprintf(logfile, "\n\n\tRuntime in ms:%ld", tss(table->start_time));
+	fprintf(logfile, "\n\n\tRuntime in S:%ld", tss(table->start_time) / 1000);
 	fclose(logfile);
 }
