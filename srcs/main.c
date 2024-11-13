@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/11 16:17:46 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/13 18:21:39 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(int argc, char *argv[])
 {
 	t_table	table;
 
+	FILE *log_file = fopen("output_routine.log", "w"); //TODO Delete
+	fprintf(log_file, "");
 	if (error_check(argc, argv))
 		return (1);
 	if (argc == 5 || argc == 6)

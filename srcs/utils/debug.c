@@ -6,11 +6,34 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:37:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/12 14:13:56 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/13 17:48:44 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+// static char	*convert_time_format(long milliseconds)
+// {
+// 	time_t		seconds;
+// 	long		ms;
+// 	struct tm	*ptm;
+// 	char		time_string[40];
+// 	char		full_time_string[50];
+// 	long		formatted_time;
+// 	char		*ret;
+
+// 	ret = malloc(20);
+// 	seconds = milliseconds / 1000;
+// 	ms = milliseconds % 1000;
+// 	ptm = localtime(&seconds);
+// 	strftime(time_string, sizeof(time_string), "%H%M%S", ptm);
+// 	snprintf(full_time_string, sizeof(full_time_string), "%s%03ld", time_string,
+// 		ms);
+// 	printf("%s\n", full_time_string);
+// 	sscanf(full_time_string, "%ld", &formatted_time);
+// 	sprintf(ret, "%ld", formatted_time);
+// 	return (ret);
+// }
 
 void	debug(t_table *table)
 {
@@ -21,6 +44,7 @@ void	debug(t_table *table)
 	logfile = fopen("output.log", "w");
 	if (!logfile)
 		return ;
+	// fprintf(logfile, "\tPhilosopher start time %s\n", convert_time_format(table->start_time));
 	fprintf(logfile, "Philosopher Table Initialization:\n");
 	fprintf(logfile, "\tPhilosopher Amount: %u\n", table->philo_amount);
 	fprintf(logfile, "\tTime to Die: %ld\n", table->time2die);

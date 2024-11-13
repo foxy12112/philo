@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/11 15:53:13 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/13 18:25:18 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ typedef struct s_table
 	int				all_full;
 	long			start_time;
 	int				philo_amount;
+	pthread_mutex_t	spaek;
 	t_philo			**philo;
+	pthread_mutex_t	start;
 	pthread_mutex_t	*forks;
 }					t_table;
 
@@ -75,7 +77,7 @@ int					init(int argc, char *argv[], t_table *table);
 
 //			print						//
 
-void	print_status(long time, int id, int status);
+void	print_status(long time, int id, int status, t_table *table);
 
 //			time functions				//
 
@@ -94,6 +96,5 @@ void				ft_end(t_table *table);
 
 void	debug(t_table *table);
 void	log_philo_data(t_table *table);
-void	check_philo_thread_a_forks(t_table *table);
 
 #endif
