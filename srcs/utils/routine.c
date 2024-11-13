@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/13 18:28:01 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/13 18:52:23 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*philo_routine(void *philo_ptr)
 	pthread_mutex_lock(&philo->table->start);
 	pthread_mutex_unlock(&philo->table->start);
 	philo->time_to_die = philo->table->time2die + philo_get_time();
-		think(philo);
+	think(philo);
 	if (philo->philo_id % 2 == 0)
 		ft_usleep(philo->table->time2eat / 2);
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
