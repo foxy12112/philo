@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/13 18:25:18 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/15 14:22:13 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
 void	one_philo(t_table *table);
 void	*deadwatch(void *table_ptr);
+void	*milk(void *philo_ptr);
 
 //			init						//
 
