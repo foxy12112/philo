@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/15 14:22:13 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/19 16:53:56 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define EAT 1
-# define THINK 2
-# define SLEEP 3
-# define FORK 4
-# define DEAD 5
+# define EAT "is eating"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define FORK "has taken a fork"
+# define DEAD "died"
 
 typedef struct s_philo
 {
@@ -49,6 +49,8 @@ typedef struct s_table
 {
 	pthread_t		*pid;
 	long			time2die;
+	pthread_mutex_t	stop;
+	int				stup;
 	int				dead;
 	long			time2eat;
 	long			time2sleep;
@@ -64,7 +66,7 @@ typedef struct s_table
 
 //			routine						//
 
-void	think(t_philo *philo);
+int	think(t_philo *philo);
 int		eat(t_philo *philo);
 void	*philo_routine(void *philo_ptr);
 void	sleepin(t_philo *philo);
@@ -78,7 +80,7 @@ int					init(int argc, char *argv[], t_table *table);
 
 //			print						//
 
-void	print_status(long time, int id, int status, t_table *table);
+int				print_status(long time, int id, char *status, t_table *table);
 
 //			time functions				//
 
@@ -92,6 +94,7 @@ int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
 int					error_check(int argc, char *argv[]);
 void				ft_end(t_table *table);
+void				ft_end_one(t_table *table);
 
 //			Debug						//
 

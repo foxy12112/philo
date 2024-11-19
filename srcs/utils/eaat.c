@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/16 18:11:57 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/19 16:51:55 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	eat(t_philo *philo)
 		philo->eating = 1;
 		if (philo->dead == 1 || philo->table->dead == 1)
 			return (pthread_mutex_unlock(&philo->lock), return_forks(philo), 1);
-		print_status(tss(philo->table->start_time), philo->philo_id, EAT, philo->table);
+		if (print_status(tss(philo->table->start_time), philo->philo_id, EAT, philo->table) == 2)
+			return (2);
 		philo->eat_count++;
 		ft_usleep(philo->table->time2eat);
 		philo->eating = 0;
@@ -70,9 +71,11 @@ int	eat(t_philo *philo)
 	return (0);
 }
 
-void	think(t_philo *philo)
+int	think(t_philo *philo)
 {
-	print_status(tss(philo->table->start_time), philo->philo_id, THINK, philo->table);
+	if(print_status(tss(philo->table->start_time), philo->philo_id, THINK, philo->table) == 2)
+		return (2);
+	return (0);
 }
 
 void	sleepin(t_philo *philo)

@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/11/16 16:11:09 by ldick            ###   ########.fr        #
+#    Updated: 2024/11/19 16:20:28 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ NC			:= \033[0m
 COMPILER	=	cc
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
-CFLAGS		=	-pthread -Wall -Werror -Wextra -g -fsanitize=address 
+CFLAGS		=	-pthread -Wall -Werror -Wextra -g #-fsanitize=address
 ERROR_FILE	=	error.log
 
 #################################################################################################
@@ -64,7 +64,7 @@ bin/%.o:		srcs/%.c | bin
 				@$(COMPILER) -c -o $@ $^ $(CFLAGS) $(INCLUDES) 2> $(ERROR_FILE) || (cat $(ERROR_FILE) && echo "$(RED)Compilation failed :0\nfailed file: \t\t$(YELLOW)$<$(NC)\n\n" && exit 1)
 
 $(NAME):		$(OBJS)
-				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS) 
+				@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
 				@echo "\t\t\t\t$(RED) compilation success :3"
 
 clean:
