@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/19 16:55:31 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/20 17:59:10 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,26 @@
 void	one_philo(t_table *table)
 {
 	table->philo[0]->start_time = table->start_time;
-	if (pthread_create(&table->pid[0], NULL, &philo_routine, table->philo[0]))
+	if (pthread_create(&table->pid[0], NULL, &philo_one, table->philo[0]))
 		return ;
-	// pthread_detach(table->pid[0]);
-	while (!table->philo[0]->dead)
-		ft_usleep(0);
-	pthread_mutex_destroy(&table->philo[0]->lock);
-	pthread_mutex_destroy(table->forks);
+	pthread_join(table->pid[0], NULL);
 	return ;
+}
+
+void	*philo_one(void *philo_ptr)
+{
+	t_philo *philo;
+
+	philo = (t_philo *)philo_ptr;
+	pthread_mutex_lock(&philo->table->start);
+	pthread_mutex_unlock(&philo->table->start);
+
+	think(philo);
+	print_status(tss(philo->table->start_time), philo->philo_id, FORK, philo->table);
+	ft_usleep(philo->table->time2die);
+	print_status(tss(philo->table->start_time), philo->philo_id, DEAD, philo->table);
+	philo->table->dead = 1;
+	return (NULL);
 }
 
 void	*philo_routine(void *philo_ptr)
@@ -37,10 +49,6 @@ void	*philo_routine(void *philo_ptr)
 	if (philo->philo_id % 2 == 0)
 		ft_usleep(philo->table->time2eat / 2);
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
-	if (pthread_create(&philo->pid, NULL, &deadwatch, (void *)philo))
-		return ((void *)1);
-	// if (pthread_create(&philo->pid, NULL, &milk, (void *)philo))
-	// 	return ((void *)1); //TODO confusion
 	while (philo->table->dead == 0 || philo->table->stup == 0)
 	{
 		if (philo->table->meals2eat == philo->eat_count)
@@ -61,7 +69,7 @@ void	*deadwatch(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (!philo->table->dead && !philo->dead)
+	while (philo->table->dead == 0 && philo->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
 		if (philo_get_time() >= philo->time_to_die && philo->eating == 0)

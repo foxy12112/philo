@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/19 16:51:55 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/20 16:55:31 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	eat(t_philo *philo)
 			return (0);
 	}
 	else if (foks == 2)
-		ft_usleep(philo->table->time2die);
-	return_forks(philo);
+		return (ft_usleep(philo->table->time2die), 2);
+	if (philo->table->philo_amount > 1)
+		return_forks(philo);
 	sleepin(philo);
 	return (0);
 }
