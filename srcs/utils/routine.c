@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/20 18:10:43 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/21 17:31:03 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	*philo_one(void *philo_ptr)
 	pthread_mutex_unlock(&philo->table->start);
 
 	think(philo);
-	print_status(tss(philo->table->start_time), philo->philo_id, FORK, philo->table);
+	print_status(philo->philo_id, FORK, philo->table);
 	ft_usleep(philo->table->time2die);
-	print_status(tss(philo->table->start_time), philo->philo_id, DEAD, philo->table);
+	print_status(philo->philo_id, DEAD, philo->table);
 	philo->table->dead = 1;
 	return (NULL);
 }
@@ -53,9 +53,9 @@ void	*philo_routine(void *philo_ptr)
 	{
 		if (philo->table->meals2eat == philo->eat_count)
 			philo->table->all_full++;
-		if (eat(philo) == 2 || philo->table->dead)
+		if (eat(philo) == 2 || philo->table->dead || philo->table->stup)
 			break;
-		if (philo->table->philo_amount == philo->table->all_full || philo->table->dead)
+		if (philo->table->stup == 1 || philo->table->dead)
 			break ;
 		if (think(philo) == 2 || philo->table->dead)
 			break ;
@@ -68,13 +68,12 @@ void	*deadwatch(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (philo->table->dead == 0 && philo->dead == 0)
+	while (philo->table->dead == 0 && philo->dead == 0 && philo->table->stup == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
 		if (philo_get_time() >= philo->time_to_die && philo->eating == 0)
 		{
-			print_status(tss(philo->table->start_time), philo->philo_id, DEAD,
-				philo->table);
+			print_status(philo->philo_id, DEAD, philo->table);
 			philo->dead = 1;
 			philo->table->dead = 1;
 		}
@@ -91,7 +90,7 @@ void	*milk(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
-	while (philo->table->dead == 0 && philo->table->all_full != philo->table->philo_amount)
+	while (philo->table->dead == 0)
 	{
 		pthread_mutex_lock(&philo->table->stop);
 		if (philo->eat_count == philo->table->meals2eat)

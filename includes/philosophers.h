@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/20 17:49:45 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/21 17:24:01 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int					init(int argc, char *argv[], t_table *table);
 
 //			print						//
 
-int				print_status(long time, int id, char *status, t_table *table);
+int				print_status(int id, char *status, t_table *table);
 
 //			time functions				//
 

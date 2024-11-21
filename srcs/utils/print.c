@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/20 15:44:58 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/21 17:23:08 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@
 // 	return (0);
 // }
 
-int	print_status(long time, int id, char *status, t_table *table)
+int	print_status(int id, char *status, t_table *table)
 {
-	if (time == 1)
-		time = 1;
 	if (table->all_full == table->philo_amount || table->dead == 1)
 		return (2);
 	pthread_mutex_lock(&table->spaek);
