@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/21 17:23:08 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/22 13:54:12 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 int	print_status(int id, char *status, t_table *table)
 {
-	if (table->all_full == table->philo_amount || table->dead == 1)
+	if (table->all_full == table->philo_amount || table->dead == 1 || table->stup)
 		return (2);
 	pthread_mutex_lock(&table->spaek);
 	printf("%lu %d %s\n", tss(table->start_time), id, status);
