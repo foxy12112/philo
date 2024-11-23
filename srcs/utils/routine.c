@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/21 17:31:03 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/23 16:47:28 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,59 +51,72 @@ void	*philo_routine(void *philo_ptr)
 	philo->time_to_die = philo_get_time() + philo->table->time2die;
 	while (philo->table->dead == 0 && philo->table->stup == 0)
 	{
-		if (philo->table->meals2eat == philo->eat_count)
-			philo->table->all_full++;
+		if (philo->table->stup == 1)
+			break;
 		if (eat(philo) == 2 || philo->table->dead || philo->table->stup)
 			break;
 		if (philo->table->stup == 1 || philo->table->dead)
 			break ;
-		if (think(philo) == 2 || philo->table->dead)
+		if (think(philo) == 2 || philo->table->dead || philo->table->stup == 1)
 			break ;
 	}
 	return (NULL);
 }
 
-void	*deadwatch(void *philo_ptr)
+void	*deadwatch(void *table_ptr)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)philo_ptr;
-	while (philo->table->dead == 0 && philo->dead == 0 && philo->table->stup == 0)
+	t_table	*table;
+	int i;
+	
+	i = 0;
+	table = (t_table *)table_ptr;
+	while (table->dead == 0 && table->stup == 0)
 	{
-		pthread_mutex_lock(&philo->lock);
-		if (philo_get_time() >= philo->time_to_die && philo->eating == 0)
+		while(i < table->philo_amount)
 		{
-			print_status(philo->philo_id, DEAD, philo->table);
-			philo->dead = 1;
-			philo->table->dead = 1;
+			pthread_mutex_lock(&table->philo[i]->lock);
+			if (philo_get_time() >= table->philo[i]->time_to_die && table->philo[i]->eating == 0)
+			{
+				print_status(table->philo[i]->philo_id, DEAD, table);
+				table->philo[i]->dead = 1;
+				table->dead = 1;
+			}
+			pthread_mutex_unlock(&table->philo[i]->lock);
+			if (table->philo[i]->dead || table->philo[i]->table->dead)
+				return (NULL) ;
+			i++;
 		}
-		pthread_mutex_unlock(&philo->lock);
-		if (philo->dead || philo->table->dead
-			|| philo->table->all_full == philo->table->philo_amount)
-			break ;
+		i = 0;
 	}
 	return (NULL);
 }
 
-void	*milk(void *philo_ptr)
+void	*milk(void *table_ptr)
 {
-	t_philo	*philo;
+	t_table	*table;
+	int i;
 
-	philo = (t_philo *)philo_ptr;
-	while (philo->table->dead == 0)
+	i = 0;
+	table = (t_table *)table_ptr;
+	while (table->dead == 0)
 	{
-		pthread_mutex_lock(&philo->table->stop);
-		if (philo->eat_count == philo->table->meals2eat)
+		pthread_mutex_lock(&table->stop);
+		while(i < table->philo_amount)
 		{
-			philo->eat_count++;
-			philo->table->all_full++;
+			if (table->philo[i]->eat_count == table->meals2eat)
+			{
+				table->all_full++;
+				table->philo[i]->eat_count = 9999999;
+			}
+			pthread_mutex_unlock(&table->stop);
+			if (table->all_full == table->philo_amount)
+			{
+				table->stup = 1;
+				return (NULL) ;
+			}
+			i++;
 		}
-		pthread_mutex_unlock(&philo->table->stop);
-		if (philo->table->all_full == philo->table->philo_amount)
-		{
-			philo->table->stup = 1;
-			break ;
-		}
+		i = 0;
 	}
 	return (NULL);
 }

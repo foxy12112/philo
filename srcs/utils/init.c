@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/19 16:53:51 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/23 15:34:26 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	init_philos(t_table *table)
 		table->philo[i]->time_to_die = table->time2die;
 		table->philo[i]->importance = 0;
 		table->philo[i]->dead = 0;
+		table->philo[i]->fork_l_c = 0;
+		table->philo[i]->fork_r_c = 0;
 		if (pthread_mutex_init(&table->philo[i]->lock, NULL) != 0)
 			return (0);
 		i++;

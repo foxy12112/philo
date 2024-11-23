@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/22 16:06:37 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/23 16:12:09 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,21 @@ int	main(int argc, char *argv[])
 	t_table	table;
 	pthread_t t;
 	pthread_t m;
-	int i;
 
-	i = -1;
 	if (error_check(argc, argv))
 		return (1);
 	if (argc == 5 || argc == 6)
 		init(argc, argv, &table);
 	if (table.meals2eat != -1)
 	{
-		pthread_create(&t, NULL, &milk, &table.philo[0]);
+		pthread_create(&t, NULL, &milk, &table);
 		pthread_detach(t);
 		// pthread_join(t, NULL);
 	}
 	if (table.philo_amount > 1)
 	{
 		pthread_create(&m, NULL, &deadwatch, &table.philo[0]);
+		pthread_detach(m);
 		multi_philo(&table);
 	}
 	else if (table.philo_amount == 1)

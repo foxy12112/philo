@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/22 13:54:12 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/23 16:43:54 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	print_status(int id, char *status, t_table *table)
 		return (2);
 	pthread_mutex_lock(&table->spaek);
 	printf("%lu %d %s\n", tss(table->start_time), id, status);
+	// printf("--%d--%d\n", table->philo[0]->eat_count, table->all_full);
+	// printf("--%d--%d\n", table->philo[1]->eat_count, table->all_full);
+	// printf("--%d--%d\n", table->philo[2]->eat_count, table->all_full);
+	// printf("--%d--%d\n", table->philo[3]->eat_count, table->all_full);
+	// printf("--%d--%d\n", table->philo[4]->eat_count, table->all_full);
 	pthread_mutex_unlock(&table->spaek);
 	return (0);
 }

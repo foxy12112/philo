@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/21 17:24:01 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/23 15:23:07 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_philo
 	long			start_time;
 	long			deb_time;
 	int				dead;
+	int				fork_l_c;
+	int				fork_r_c;
 }					t_philo;
 
 typedef struct s_table
