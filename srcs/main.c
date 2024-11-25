@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/23 16:12:09 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/25 18:34:21 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	multi_philo(t_table *table)
 	pthread_mutex_lock(&table->start);
 	while (i < table->philo_amount)
 	{
+		table->philo[i]->time_to_die = philo_get_time() + table->time2die;
 		pthread_create(&table->pid[i], NULL, &philo_routine, table->philo[i]);
 		i++;
 	}
@@ -48,11 +49,10 @@ int	main(int argc, char *argv[])
 	{
 		pthread_create(&t, NULL, &milk, &table);
 		pthread_detach(t);
-		// pthread_join(t, NULL);
 	}
 	if (table.philo_amount > 1)
 	{
-		pthread_create(&m, NULL, &deadwatch, &table.philo[0]);
+		pthread_create(&m, NULL, &deadwatch, &table);
 		pthread_detach(m);
 		multi_philo(&table);
 	}
@@ -62,6 +62,9 @@ int	main(int argc, char *argv[])
 		ft_end_one(&table);
 		return(0);
 	}
+	// if (table.stup == 1)
+	// 	return (ft_end(&table), 1);
+	pthread_join(t, NULL);
 	ft_end(&table);
 	return (0);
 }

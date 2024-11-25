@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/23 16:43:54 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/25 19:34:42 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,11 @@
 
 int	print_status(int id, char *status, t_table *table)
 {
-	if (table->all_full == table->philo_amount || table->dead == 1 || table->stup)
-		return (2);
-	pthread_mutex_lock(&table->spaek);
+	pthread_mutex_lock(&table->stop);
+	if (table->dead == 1 || table->stup == 1)
+		return (pthread_mutex_unlock(&table->stop), 2);
 	printf("%lu %d %s\n", tss(table->start_time), id, status);
-	// printf("--%d--%d\n", table->philo[0]->eat_count, table->all_full);
-	// printf("--%d--%d\n", table->philo[1]->eat_count, table->all_full);
-	// printf("--%d--%d\n", table->philo[2]->eat_count, table->all_full);
-	// printf("--%d--%d\n", table->philo[3]->eat_count, table->all_full);
-	// printf("--%d--%d\n", table->philo[4]->eat_count, table->all_full);
-	pthread_mutex_unlock(&table->spaek);
+	pthread_mutex_unlock(&table->stop);
 	return (0);
 }
 
