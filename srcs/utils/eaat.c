@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/23 16:53:16 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/25 13:57:14 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,16 @@ static int	pick_forks(t_philo *philo)
 
 static void	return_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->fork_r);
-	philo->fork_r_c = 0;
-	pthread_mutex_unlock(philo->fork_l);
-	philo->fork_l_c = 0;
+	if (philo->fork_r_c == 1)
+	{
+		pthread_mutex_unlock(philo->fork_r);
+		philo->fork_r_c = 0;
+	}
+	if (philo->fork_l_c == 1)
+	{
+		pthread_mutex_unlock(philo->fork_l);
+		philo->fork_l_c = 0;
+	}
 }
 
 int	eat(t_philo *philo)
@@ -55,7 +61,7 @@ int	eat(t_philo *philo)
 		philo->time_to_die = philo_get_time() + philo->table->time2die;
 		philo->eating = 1;
 		if (philo->dead == 1 || philo->table->dead == 1 || philo->table->stup)
-			return (pthread_mutex_unlock(&philo->lock), return_forks(philo), 1);
+			return (pthread_mutex_unlock(&philo->lock), return_forks(philo), 2);
 		if (print_status(philo->philo_id, EAT, philo->table) == 2 || philo->table->stup)
 			return (2);
 		ft_usleep(philo->table->time2eat);
