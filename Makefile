@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/11/21 16:24:14 by ldick            ###   ########.fr        #
+#    Updated: 2024/11/26 17:19:45 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ NC			:= \033[0m
 COMPILER	=	cc
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
-CFLAGS		=	-pthread -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS		=	-pthread -Wall -Werror -Wextra -g -fsanitize=address
 ERROR_FILE	=	error.log
 
 #################################################################################################

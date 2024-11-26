@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/23 15:34:26 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/26 17:18:44 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	init(int argc, char *argv[], t_table *table)
 	table->time2eat = ft_atol(argv[3]);
 	table->time2sleep = ft_atol(argv[4]);
 	pthread_mutex_init(&table->start, NULL);
-	pthread_mutex_init(&table->spaek, NULL);
 	pthread_mutex_init(&table->stop, NULL);
 	table->dead = 0;
 	if (argc == 6)
