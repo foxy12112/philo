@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/26 17:18:44 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/27 16:41:19 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ static int	init_philos(t_table *table)
 		table->philo[i]->dead = 0;
 		table->philo[i]->fork_l_c = 0;
 		table->philo[i]->fork_r_c = 0;
-		if (pthread_mutex_init(&table->philo[i]->lock, NULL) != 0)
-			return (0);
 		i++;
 	}
 	return (1);

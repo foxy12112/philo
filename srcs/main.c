@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/26 17:16:52 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/27 17:02:57 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	multi_philo(t_table *table)
 	int			i;
 
 	i = 0;
-	 //TODO still confusion but this stsayz for now, works, i think
 	pthread_mutex_lock(&table->start);
 	while (i < table->philo_amount)
 	{
@@ -49,14 +48,14 @@ int	main(int argc, char *argv[])
 	{
 		pthread_create(&t, NULL, &milk, &table);
 		pthread_detach(t);
-		pthread_join(t, NULL);
+		// pthread_join(t, NULL);
 	}
 	if (table.philo_amount > 1)
 	{
 		pthread_create(&m, NULL, &deadwatch, &table);
 		pthread_detach(m);
 		multi_philo(&table);
-		pthread_join(m, NULL);
+		// pthread_join(m, NULL);
 	}
 	else if (table.philo_amount == 1)
 	{
@@ -64,8 +63,12 @@ int	main(int argc, char *argv[])
 		ft_end_one(&table);
 		return(0);
 	}
-	// if (table.stup == 1)
-	// 	return (ft_end(&table), 1);
+	int i = 0;
+	while(i < table.philo_amount)
+	{
+		printf("--philo_%d--has_eaten_%d_times--\n", i, table.philo[i]->eat_count - 1);
+		i++;
+	}
 	ft_end(&table);
 	return (0);
 }

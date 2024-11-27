@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/25 19:36:54 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/27 17:02:46 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,19 @@ void	*deadwatch(void *table_ptr)
 	{
 		while(i < table->philo_amount)
 		{
-			pthread_mutex_lock(&table->philo[i]->lock);
-			if (philo_get_time() >= table->philo[i]->time_to_die && table->philo[i]->eating == 0)
+			pthread_mutex_lock(&table->stop);
+			if (table->stup == 1)
+				return (pthread_mutex_unlock(&table->stop), NULL);
+			if (philo_get_time() >= table->philo[i]->time_to_die)
 			{
+				pthread_mutex_unlock(&table->stop);
 				print_status(table->philo[i]->philo_id, DEAD, table);
 				pthread_mutex_lock(&table->stop);
 				table->philo[i]->dead = 1;
 				table->dead = 1;
 				table->stup = 1;
-				pthread_mutex_unlock(&table->stop);
-				return (NULL);
+				return (pthread_mutex_unlock(&table->stop), NULL);
 			}
-			pthread_mutex_unlock(&table->philo[i]->lock);
 			i++;
 		}
 		i = 0;
@@ -101,10 +102,12 @@ void	*milk(void *table_ptr)
 		while(i < table->philo_amount)
 		{
 			pthread_mutex_lock(&table->stop);
+			if (table->stup == 1)
+				return (pthread_mutex_unlock(&table->stop), NULL);
 			if (table->philo[i]->eat_count == table->meals2eat)
 			{
 				table->all_full++;
-				table->philo[i]->eat_count = 9999999;
+				table->philo[i]->eat_count = table->philo[i]->eat_count + 1;
 			}
 			if (table->all_full == table->philo_amount)
 			{
