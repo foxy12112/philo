@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/25 19:36:54 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/28 12:02:43 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*deadwatch(void *table_ptr)
 	{
 		while(i < table->philo_amount)
 		{
-			pthread_mutex_lock(&table->philo[i]->lock);
+			// pthread_mutex_lock(&table->philo[i]->lock);
 			if (philo_get_time() >= table->philo[i]->time_to_die && table->philo[i]->eating == 0)
 			{
 				print_status(table->philo[i]->philo_id, DEAD, table);
@@ -81,7 +81,7 @@ void	*deadwatch(void *table_ptr)
 				pthread_mutex_unlock(&table->stop);
 				return (NULL);
 			}
-			pthread_mutex_unlock(&table->philo[i]->lock);
+			// pthread_mutex_unlock(&table->philo[i]->lock);
 			i++;
 		}
 		i = 0;
