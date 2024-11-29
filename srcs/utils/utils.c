@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/26 17:19:28 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/29 16:15:47 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,17 @@ long	ft_atol(const char *str)
 
 static void	ft_freeall(t_table *table)
 {
+	int	i;
+
+	i = 0;
 	if (table->forks)
 		free(table->forks);
+	while (i < table->philo_amount)
+	{
+		if (table->philo[i])
+			free(table->philo[i]);
+		i++;
+	}
 	if (table->philo)
 		free(table->philo);
 	if (table->pid)
@@ -89,10 +98,10 @@ void	ft_end(t_table *table)
 	while (i < table->philo_amount)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
-		pthread_mutex_destroy(&table->philo[i]->lock);
 		i++;
 	}
 	pthread_mutex_destroy(&table->start);
+	pthread_mutex_destroy(&table->stop);
 	ft_freeall(table);
 }
 

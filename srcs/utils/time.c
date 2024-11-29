@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:21 by ldick             #+#    #+#             */
-/*   Updated: 2024/10/25 19:49:00 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/29 15:19:44 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,13 @@ void	ft_usleep(long eepy_time)
 	while ((philo_get_time() - start) < eepy_time)
 		usleep(eepy_time / 2);
 }
+
+int get_stop_flag(t_table *table)
+{
+	int tmp;
+	pthread_mutex_lock(&table->stop);
+	tmp = table->stup;
+	pthread_mutex_unlock(&table->stop);
+	return(tmp);
+}
+

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/26 17:18:37 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/29 17:02:26 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	time;
+	pthread_mutex_t	eat_cont;
 	int				eat_count;
 	int				sleeping;
 	int				eating;
@@ -47,11 +49,15 @@ typedef struct s_philo
 	int				fork_r_c;
 }					t_philo;
 
+//TODO NORM
+
 typedef struct s_table
 {
 	pthread_t		*pid;
 	long			time2die;
 	pthread_mutex_t	stop;
+	pthread_t		milk;
+	pthread_t		deadwatch;
 	int				stup;
 	int				dead;
 	long			time2eat;
@@ -75,6 +81,7 @@ void	one_philo(t_table *table);
 void	*deadwatch(void *table_ptr);
 void	*milk(void *philo_ptr);
 void	*philo_one(void *philo_ptr);
+void	return_forks(t_philo *philo);
 
 //			init						//
 
@@ -97,6 +104,7 @@ long				ft_atol(const char *str);
 int					error_check(int argc, char *argv[]);
 void				ft_end(t_table *table);
 void				ft_end_one(t_table *table);
+int					get_stop_flag(t_table *table);
 
 //			Debug						//
 
