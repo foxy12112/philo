@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 13:39:58 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/29 16:34:50 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/30 19:30:53 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@
 
 int	print_status(int id, char *status, t_table *table)
 {
-	pthread_mutex_lock(&table->stop);
-	if (table->stup == 1)
-	{
-		pthread_mutex_unlock(&table->stop);
+	if (get_stop_flag(table) == 1)
 		return (2);
-	}
-	printf("%lu %d %s\n", tss(table->start_time), id, status);
-	pthread_mutex_unlock(&table->stop);
+	printf("%lu %d %s\n", tss(table), id, status);
 	return (0);
 }
 

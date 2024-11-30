@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/29 17:02:26 by ldick            ###   ########.fr       */
+/*   Updated: 2024/11/30 19:32:40 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_table
 	pthread_t		*pid;
 	long			time2die;
 	pthread_mutex_t	stop;
+	pthread_mutex_t	time;
 	pthread_t		milk;
 	pthread_t		deadwatch;
 	int				stup;
@@ -95,7 +96,7 @@ int				print_status(int id, char *status, t_table *table);
 
 long				philo_get_time(void);
 void				ft_usleep(long eepy_time);
-long				tss(long start_time);
+long				tss(t_table *table);
 
 //			utils						//
 
