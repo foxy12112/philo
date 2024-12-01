@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 19:37:54 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/01 17:57:33 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*philo_routine(void *philo_ptr)
 	pthread_mutex_unlock(&philo->table->start);
 	think(philo);
 	if (philo->philo_id % 2 == 0)
-		ft_usleep(philo->table->time2eat / 2);
+		ft_usleep(philo->table->time2eat / 10);
 	while (true)
 	{
 		if (eat(philo) == 2)
