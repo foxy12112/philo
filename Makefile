@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/12/01 17:52:34 by ldick            ###   ########.fr        #
+#    Updated: 2024/12/02 23:35:42 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,14 @@ NC			:= \033[0m
 COMPILER	=	cc
 INCLUDES	=	-I includes -I main-libs
 SUBMODULE	=	main-libs/Makefile
-CFLAGS		=	-pthread -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS		=	-pthread -Wall -Werror -Wextra -g #-fsanitize=address
 ERROR_FILE	=	error.log
 
 #################################################################################################
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c print.c time.c utils.c error.c eaat.c routine.c debug.c
+_UTILS		=	init.c print.c time.c utils.c error.c eaat.c routine.c debug.c utils_two.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)

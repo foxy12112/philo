@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 19:32:40 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 23:42:20 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int					error_check(int argc, char *argv[]);
 void				ft_end(t_table *table);
 void				ft_end_one(t_table *table);
 int					get_stop_flag(t_table *table);
+void				ft_set_flag(t_table *table)
 
 //			Debug						//
 

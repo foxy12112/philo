@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:54:02 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/01 17:57:33 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 23:57:05 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ void	one_philo(t_table *table)
 	if (pthread_create(&table->pid[0], NULL, &philo_one, table->philo[0]))
 		return ;
 	pthread_join(table->pid[0], NULL);
+	ft_end_one(table);
 	return ;
 }
 
 void	*philo_one(void *philo_ptr)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
 	pthread_mutex_lock(&philo->table->start);
@@ -62,28 +63,27 @@ void	*philo_routine(void *philo_ptr)
 void	*deadwatch(void *table_ptr)
 {
 	t_table	*table;
-	int i;
-	
+	int		i;
+
 	i = 0;
 	table = (t_table *)table_ptr;
 	pthread_mutex_lock(&table->start);
 	pthread_mutex_unlock(&table->start);
 	while (true)
 	{
-		while(i < table->philo_amount)
+		while (i < table->philo_amount)
 		{
-			if (table->stup == 1)
+			if (get_stop_flag(table) == 1)
 				return (NULL);
 			pthread_mutex_lock(&table->philo[i]->time);
-			if (get_stop_flag(table) == 0 && philo_get_time() >= table->philo[i]->time_to_die)
+			pthread_mutex_lock(&table->stop);
+			if (!table->stup && philo_get_time() >= table->philo[i]->time_to_die)
 			{
-				pthread_mutex_unlock(&table->philo[i]->time);
-				print_status(table->philo[i]->philo_id, DEAD, table);
-				pthread_mutex_lock(&table->stop);
+				printf("%lu %d %s\n", tss(table), i, DEAD);
 				table->stup = 1;
-				pthread_mutex_unlock(&table->stop);
-				return (NULL);
+				return (pthread_mutex_unlock(&table->stop), NULL);
 			}
+			pthread_mutex_unlock(&table->stop);
 			pthread_mutex_unlock(&table->philo[i]->time);
 			i++;
 		}
@@ -94,14 +94,14 @@ void	*deadwatch(void *table_ptr)
 
 void	*milk(void *table_ptr)
 {
-	t_table	*table;
-	int i;
+	t_table		*table;
+	int			i;
 
 	i = 0;
-	table = (t_table *)table_ptr; 
+	table = (t_table *)table_ptr;
 	while (1)
 	{
-		while(i < table->philo_amount)
+		while (i < table->philo_amount)
 		{
 			if (get_stop_flag(table) == 1)
 				return (NULL);
@@ -113,14 +113,7 @@ void	*milk(void *table_ptr)
 			}
 			pthread_mutex_unlock(&table->philo[i]->eat_cont);
 			if (table->all_full == table->philo_amount)
-			{
-				pthread_mutex_lock(&table->stop);
-				table->stup = 1;
-				pthread_mutex_unlock(&table->stop);
-				return (NULL);
-			}
-			if (get_stop_flag(table) == 1)
-				return (NULL);
+				return (ft_set_flag(&table), NULL);
 			i++;
 		}
 		i = 0;

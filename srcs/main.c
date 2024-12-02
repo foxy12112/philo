@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:36:38 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/01 17:56:26 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 23:35:50 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	multi_philo(t_table *table)
 	int			i;
 
 	i = 0;
-	 //TODO still confusion but this stsayz for now, works, i think
-	pthread_mutex_lock(&table->start);
 	pthread_mutex_lock(&table->time);
 	table->start_time = philo_get_time();
 	pthread_mutex_unlock(&table->time);
@@ -32,7 +30,7 @@ static void	multi_philo(t_table *table)
 	}
 	i = 0;
 	pthread_mutex_unlock(&table->start);
-	while(i < table->philo_amount)
+	while (i < table->philo_amount)
 	{
 		pthread_join(table->pid[i], NULL);
 		i++;
@@ -48,17 +46,12 @@ int	main(int argc, char *argv[])
 	if (argc == 5 || argc == 6)
 		init(argc, argv, &table);
 	if (table.philo_amount == 1)
-	{
-		one_philo(&table);
-		ft_end_one(&table);
-		return(0);
-	}
+		return (one_philo(&table), 0);
 	if (table.meals2eat != -1)
-	{
 		pthread_create(&table.milk, NULL, &milk, &table);
-	}
 	if (table.philo_amount > 1)
 	{
+		pthread_mutex_lock(&table.start);
 		pthread_create(&table.deadwatch, NULL, &deadwatch, &table);
 		multi_philo(&table);
 		pthread_join(table.deadwatch, NULL);
@@ -68,24 +61,3 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-//TODO 5 800 200 200 7, stops at 3800ms sometimes if it ends on taking a fork
-
-// int	main(int argc, char *argv[])
-// {
-// 	t_table	table;
-
-// 	FILE *log_file = fopen("output_routine.log", "wb"); //TODO Delete
-// 	fclose(log_file);
-// 	if (error_check(argc, argv))
-// 		return (1);
-// 	if (argc == 5 || argc == 6)
-// 		init(argc, argv, &table);
-// 	debug(&table);
-// 	if (table.philo_amount > 1)
-// 		multi_philo(&table);
-// 	else
-// 		one_philo(&table);
-// 	log_philo_data(&table);
-// 	ft_end(&table);
-// 	return (0);
-// }

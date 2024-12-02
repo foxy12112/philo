@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:34:59 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 19:50:31 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 16:33:24 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	pick_forks(t_philo *philo)
 {
 	if (get_stop_flag(philo->table) == 0)
 	{
-		if (!get_stop_flag(philo->table) && !pthread_mutex_lock(philo->fork_r) && philo->fork_r_c == 0)
+		if (!pthread_mutex_lock(philo->fork_r) && philo->fork_r_c == 0)
 			{
 				philo->fork_r_c = 1;
 				if (print_status(philo->philo_id, FORK, philo->table) == 2)
@@ -24,7 +24,7 @@ static int	pick_forks(t_philo *philo)
 			}
 		else
 			return (return_forks(philo), 2);
-		if (!get_stop_flag(philo->table) && !pthread_mutex_lock(philo->fork_l) && philo->fork_l_c == 0)
+		if (!pthread_mutex_lock(philo->fork_l) && philo->fork_l_c == 0)
 			{
 				philo->fork_l_c = 1;
 				if (print_status(philo->philo_id, FORK, philo->table) == 2)
@@ -53,9 +53,6 @@ void	return_forks(t_philo *philo)
 int	eat(t_philo *philo)
 {
 	pick_forks(philo);
-	pthread_mutex_lock(&philo->time);
-	// philo->time_to_die = philo_get_time() + philo->table->time2die;
-	pthread_mutex_unlock(&philo->time);
 	if (print_status(philo->philo_id, EAT, philo->table) == 2)
 		return (return_forks(philo), 2);
 	ft_usleep(philo->table->time2eat);

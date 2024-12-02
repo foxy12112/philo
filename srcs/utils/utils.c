@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 17:21:39 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 23:57:17 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,5 @@ void	ft_end(t_table *table)
 	}
 	pthread_mutex_destroy(&table->start);
 	pthread_mutex_destroy(&table->stop);
-	ft_freeall(table);
-}
-
-void	ft_end_one(t_table *table)
-{
-	pthread_mutex_destroy(&table->forks[0]);
-	pthread_mutex_destroy(&table->stop);
-	pthread_mutex_destroy(&table->philo[0]->lock);
-	pthread_mutex_destroy(&table->start);
 	ft_freeall(table);
 }

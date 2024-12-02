@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:21 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 19:34:10 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/02 23:36:33 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ long	philo_get_time(void)
 long	tss(t_table *table)
 {
 	long	ret;
+
 	pthread_mutex_lock(&table->time);
 	ret = philo_get_time() - table->start_time;
 	pthread_mutex_unlock(&table->time);
@@ -38,12 +39,12 @@ void	ft_usleep(long eepy_time)
 		usleep(eepy_time / 2);
 }
 
-int get_stop_flag(t_table *table)
+int	get_stop_flag(t_table *table)
 {
-	int tmp;
+	int	tmp;
+
 	pthread_mutex_lock(&table->stop);
 	tmp = table->stup;
 	pthread_mutex_unlock(&table->stop);
-	return(tmp);
+	return (tmp);
 }
-
