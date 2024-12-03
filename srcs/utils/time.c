@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:58:21 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/02 23:36:33 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/03 14:39:41 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_stop_flag(t_table *table)
 	int	tmp;
 
 	pthread_mutex_lock(&table->stop);
-	tmp = table->stup;
+	tmp = table->stop_flag;
 	pthread_mutex_unlock(&table->stop);
 	return (tmp);
 }

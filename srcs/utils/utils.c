@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/02 23:57:17 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/03 14:26:06 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ long	ft_atol(const char *str)
 	return (nbr);
 }
 
-static void	ft_freeall(t_table *table)
+void	ft_freeall(t_table *table)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:35:48 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/30 19:32:54 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/03 16:41:24 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,16 @@ static int	init_forks(t_table *table)
 		i++;
 	}
 	if (table->philo_amount == 1)
-	{
-		table->philo[0]->fork_r = &table->forks[0];
-		table->philo[0]->fork_l = NULL;
-	}
+		table->philo[0]->fork_right = &table->forks[0];
 	else
 	{
-		table->philo[0]->fork_r = &table->forks[0];
-		table->philo[0]->fork_l = &table->forks[table->philo_amount - 1];
+		table->philo[0]->fork_right = &table->forks[0];
+		table->philo[0]->fork_left = &table->forks[table->philo_amount - 1];
 		i = 1;
 		while (i < table->philo_amount)
 		{
-			table->philo[i]->fork_r = &table->forks[i];
-			table->philo[i]->fork_l = &table->forks[i - 1];
+			table->philo[i]->fork_right = &table->forks[i];
+			table->philo[i]->fork_left = &table->forks[i - 1];
 			i++;
 		}
 	}
@@ -48,7 +45,6 @@ static int	init_philos(t_table *table)
 	int	i;
 
 	i = 0;
-
 	while (i < table->philo_amount)
 	{
 		table->philo[i]->table = table;
@@ -58,47 +54,50 @@ static int	init_philos(t_table *table)
 		table->philo[i]->eating = 0;
 		table->philo[i]->sleeping = 0;
 		table->philo[i]->start_time = table->start_time;
-		table->philo[i]->time_to_die = table->time2die;
+		table->philo[i]->time_to_die = table->death_time;
 		table->philo[i]->importance = 0;
 		table->philo[i]->dead = 0;
-		table->philo[i]->fork_l_c = 0;
-		table->philo[i]->fork_r_c = 0;
+		table->philo[i]->fork_left_flag = 0;
+		table->philo[i]->fork_right_flag = 0;
 		pthread_mutex_init(&table->philo[i]->time, NULL);
-		pthread_mutex_init(&table->philo[i]->eat_cont, NULL);
+		pthread_mutex_init(&table->philo[i]->eat_lock, NULL);
 		i++;
 	}
 	return (1);
 }
 
-int	init(int argc, char *argv[], t_table *table)
+static void	init_mutexes(t_table *table)
 {
-	table->start_time = philo_get_time();
-	table->meals2eat = -1;
-	table->all_full = 0;
-	table->stup = 0;
-	table->philo_amount = ft_atoi(argv[1]);
-	table->time2die = ft_atol(argv[2]);
-	table->time2eat = ft_atol(argv[3]);
-	table->time2sleep = ft_atol(argv[4]);
 	pthread_mutex_init(&table->start, NULL);
 	pthread_mutex_init(&table->stop, NULL);
 	pthread_mutex_init(&table->time, NULL);
+}
+
+int	init(int argc, char *argv[], t_table *table)
+{
+	int	i;
+
+	i = -1;
+	table->philo_amount = ft_atoi(argv[1]);
+	table->death_time = ft_atol(argv[2]);
+	table->eat_time = ft_atol(argv[3]);
+	table->sleep_time = ft_atol(argv[4]);
+	table->start_time = philo_get_time();
+	table->food_amount = -1;
+	table->all_full = 0;
+	table->stop_flag = 0;
+	init_mutexes(table);
 	table->dead = 0;
 	if (argc == 6)
-		table->meals2eat = ft_atoi(argv[5]);
+		table->food_amount = ft_atoi(argv[5]);
 	table->pid = malloc((table->philo_amount + 1) * sizeof(pthread_t));
 	if (!table->pid)
 		return (1);
 	table->forks = malloc(table->philo_amount * sizeof(pthread_mutex_t));
 	table->philo = malloc(table->philo_amount * sizeof(t_philo *));
-	int i = 0;
-	while (i < table->philo_amount)
-	{
+	while (++i < table->philo_amount)
 		table->philo[i] = malloc(sizeof(t_philo));
-		i++;
-	}
 	init_philos(table);
 	init_forks(table);
 	return (1);
 }
-

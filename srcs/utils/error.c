@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:01:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/11/23 15:20:29 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/03 16:24:07 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ int	error_check(int argc, char *argv[])
 	int	i;
 
 	i = 1;
-	while (i >= argc)
+	while (i < argc)
+	{
 		if (ft_isnum(argv[i]))
 			return (printf("non number character in arg %d\n", i), 1);
+		i++;
+	}
 	if (ft_atoi(argv[1]) > 200)
 		return (printf("more than 200 philos\n"), 1);
 	if (ft_atoi(argv[1]) <= 0)

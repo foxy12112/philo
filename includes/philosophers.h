@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/02 23:42:20 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:02:29 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct s_philo
 	struct s_table	*table;
 	pthread_t		pid;
 	int				philo_id;
-	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*fork_r;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	time;
-	pthread_mutex_t	eat_cont;
+	pthread_mutex_t	eat_lock;
 	int				eat_count;
 	int				sleeping;
 	int				eating;
@@ -43,27 +43,26 @@ typedef struct s_philo
 	int				importance;
 	long			time_to_die;
 	long			start_time;
-	long			deb_time;
 	int				dead;
-	int				fork_l_c;
-	int				fork_r_c;
+	int				fork_left_flag;
+	int				fork_right_flag;
 }					t_philo;
 
-//TODO NORM
+// TODO NORM
 
 typedef struct s_table
 {
 	pthread_t		*pid;
-	long			time2die;
+	long			death_time;
 	pthread_mutex_t	stop;
 	pthread_mutex_t	time;
 	pthread_t		milk;
 	pthread_t		deadwatch;
-	int				stup;
+	int				stop_flag;
 	int				dead;
-	long			time2eat;
-	long			time2sleep;
-	int				meals2eat;
+	long			eat_time;
+	long			sleep_time;
+	int				food_amount;
 	int				all_full;
 	long			start_time;
 	int				philo_amount;
@@ -74,15 +73,15 @@ typedef struct s_table
 
 //			routine						//
 
-int	think(t_philo *philo);
-int		eat(t_philo *philo);
-void	*philo_routine(void *philo_ptr);
-int		sleepin(t_philo *philo);
-void	one_philo(t_table *table);
-void	*deadwatch(void *table_ptr);
-void	*milk(void *philo_ptr);
-void	*philo_one(void *philo_ptr);
-void	return_forks(t_philo *philo);
+int					think(t_philo *philo);
+int					eat(t_philo *philo);
+void				*philo_routine(void *philo_ptr);
+int					sleepin(t_philo *philo);
+void				one_philo(t_table *table);
+void				*deadwatch(void *table_ptr);
+void				*milk(void *philo_ptr);
+void				*philo_one(void *philo_ptr);
+void				return_forks(t_philo *philo);
 
 //			init						//
 
@@ -90,7 +89,7 @@ int					init(int argc, char *argv[], t_table *table);
 
 //			print						//
 
-int				print_status(int id, char *status, t_table *table);
+int					print_status(int id, char *status, t_table *table);
 
 //			time functions				//
 
@@ -106,11 +105,9 @@ int					error_check(int argc, char *argv[]);
 void				ft_end(t_table *table);
 void				ft_end_one(t_table *table);
 int					get_stop_flag(t_table *table);
-void				ft_set_flag(t_table *table)
-
-//			Debug						//
-
-void	debug(t_table *table);
-void	log_philo_data(t_table *table);
+void				ft_set_flag(t_table *table);
+void				ft_freeall(t_table *table);
+void				synchronize(t_table *table);
+int					deadwatch_die(t_table *table, int i);
 
 #endif

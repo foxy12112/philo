@@ -6,7 +6,7 @@
 #    By: ldick <ldick@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/19 17:52:31 by ldick             #+#    #+#              #
-#    Updated: 2024/12/02 23:35:42 by ldick            ###   ########.fr        #
+#    Updated: 2024/12/03 14:24:51 by ldick            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ ERROR_FILE	=	error.log
 #											Sources												#
 #################################################################################################
 
-_UTILS		=	init.c print.c time.c utils.c error.c eaat.c routine.c debug.c utils_two.c
+_UTILS		=	init.c print.c time.c utils.c error.c eaat.c routine.c utils_two.c
 UTILS		=	$(addprefix utils/, $(_UTILS))
 
 _SRCS		=	main.c $(UTILS)
