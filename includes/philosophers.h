@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:07 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/03 17:02:29 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:21:54 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,7 @@ void				synchronize(t_table *table);
 int					deadwatch_die(t_table *table, int i);
 
 #endif
+
+// 130 401 200 200 10 full fail
+// 198 401 200 200 10 full fail 
+// 198 405 200 200 10 20%correct

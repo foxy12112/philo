@@ -6,7 +6,7 @@
 /*   By: ldick <ldick@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:41:27 by ldick             #+#    #+#             */
-/*   Updated: 2024/12/03 14:26:06 by ldick            ###   ########.fr       */
+/*   Updated: 2024/12/04 15:00:55 by ldick            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nbr = 0;
 	sign = 0;
-	while (str[i] != '\0' && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
+	while (str[i] != '\0' && (str[i] == 32 || str[i] == '\t'
+			|| str[i] == '\n'
 			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
@@ -53,7 +54,8 @@ long	ft_atol(const char *str)
 	i = 0;
 	nbr = 0;
 	sign = 0;
-	while (str[i] != '\0' && (str[i] == 32 || str[i] == '\t' || str[i] == '\n'
+	while (str[i] != '\0' && (str[i] == 32
+			|| str[i] == '\t' || str[i] == '\n'
 			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
